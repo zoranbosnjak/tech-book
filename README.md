@@ -1,5 +1,21 @@
 # Tech book experiments
 
+## build process
+
+```bash
+nix-shell
+
+shake                   # build all targets
+
+shake clean             # cleanup _build directory
+shake _build/book.md    # build individual target (e.g. markdown)
+shake -h                # show all options
+
+./bin/watch             # monitor file changes, auto rebuild
+
+exit # out of nix-shell
+```
+
 ## File and chapter hiearchy
 
 Root entry to a document is a single file `main.md`, which can include other
