@@ -7,6 +7,7 @@ let
 
   deps = with pkgs; [
     pandoc
+    pandoc-include
     haskellPackages.pandoc-crossref
     typst
     shake
