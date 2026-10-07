@@ -16,6 +16,7 @@ templatesTypst =
 
 targets =
     [ "_build/book.md"
+    , "_build/book.typ"
     , "_build/book.pdf"
     ]
 
@@ -37,7 +38,7 @@ main = shakeArgs shOpts $ do
         liftIO $ mapM_ putStrLn lst
 
     "_build/book.md" %> \out -> do
-        putInfo "🖋 Building markdown."
+        putInfo "🖋 Building markdown output."
         getDirectoryFiles "" sources >>= need
         cmd_
             $ "pandoc --filter pandoc-include --from=markdown"
@@ -45,15 +46,29 @@ main = shakeArgs shOpts $ do
            <> " --to=markdown main.md"
            <> " -o " <> out
 
-    "_build/book.pdf" %> \out -> do
-        putInfo "🖋 Building pdf."
-        templatesLst <- getDirectoryFiles "" templatesTypst
-        need $ ["_build/book.md"] <> templatesLst
+    "_build/book.typ" %> \out -> do
+        putInfo "🖋 Building typst output."
+        lst <- getDirectoryFiles "" templatesTypst
+        need $ lst <> ["_build/book.md"]
         cmd_
-            $ "pandoc _build/book.md"
-           <> " --pdf-engine=typst -o " <> out
+            $ "pandoc _build/book.md -o " <> out
+           <> " --from markdown"
+           <> " --to typst"
            <> " --metadata-file=metadata.yaml"
            <> " --template=templates/typst/template1.typ"
+           <> " -V template=templates/typst/template2.typ"
+
+    "_build/templates/typst/template2.typ" %> \out -> do
+        putInfo "🖋 Copy typst template."
+        copyFile' "templates/typst/template2.typ" out
+
+    "_build/book.pdf" %> \out -> do
+        putInfo "🖋 Building pdf output."
+        need
+            [ "_build/book.typ"
+            , "_build/templates/typst/template2.typ"
+            ]
+        cmd_ $ "typst compile _build/book.typ " <> out
 
   where
 

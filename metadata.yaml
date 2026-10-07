@@ -1,7 +1,6 @@
 title: "Sample Book"
 
 # typst specific variables
-template: templates/typst/template2.typ
 papersize: a4
 # mainfont: "DejaVu Sans"
 mainfont: "Lora"
