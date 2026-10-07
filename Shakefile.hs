@@ -14,10 +14,15 @@ templatesTypst =
     [ "templates/typst//"
     ]
 
+templatesHtml =
+    [ "templates/html//"
+    ]
+
 targets =
     [ "_build/book.md"
     , "_build/book.typ"
     , "_build/book.pdf"
+    , "_build/book.html"
     ]
 
 main :: IO ()
@@ -35,6 +40,7 @@ main = shakeArgs shOpts $ do
         lst <- getDirectoryFiles ""
             $ sources
            <> templatesTypst
+           <> templatesHtml
         liftIO $ mapM_ putStrLn lst
 
     "_build/book.md" %> \out -> do
@@ -69,6 +75,27 @@ main = shakeArgs shOpts $ do
             , "_build/templates/typst/template2.typ"
             ]
         cmd_ $ "typst compile _build/book.typ " <> out
+
+    "_build/templates/html/style.css" %> \out -> do
+        putInfo "🖋 Copy html style."
+        copyFile' "templates/html/style.css" out
+
+    "_build/book.html" %> \out -> do
+        putInfo "🖋 Building html output."
+        lst <- getDirectoryFiles "" templatesHtml
+        need $ lst <>
+            [ "_build/book.md"
+            , "_build/templates/html/style.css"
+            ]
+        cmd_
+            $ "pandoc _build/book.md -o " <> out
+           <> " --from markdown"
+           <> " --to html5"
+           <> " --template=templates/html/template.html"
+           <> " --css templates/html/style.css"
+           <> " --include-in-header templates/html/in-header.html"
+           <> " --include-before-body templates/html/before-body.html"
+           <> " --include-after-body templates/html/after-body.html"
 
   where
 
