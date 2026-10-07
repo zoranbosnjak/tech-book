@@ -7,13 +7,16 @@ sources =
     [ "Shakefile.hs"
     , "main.md"
     , "content//*.md"
-    , "bibliography.bib"
     , "metadata.yaml"
+    ]
+
+templatesTypst =
+    [ "templates/typst//"
     ]
 
 targets =
     [ "_build/book.md"
-    , "_build/book.rst"
+    , "_build/book.pdf"
     ]
 
 main :: IO ()
@@ -28,7 +31,9 @@ main = shakeArgs shOpts $ do
 
     phony "_sources" $ do
         putInfo "Actual source files:"
-        lst <- getDirectoryFiles "" sources
+        lst <- getDirectoryFiles ""
+            $ sources
+           <> templatesTypst
         liftIO $ mapM_ putStrLn lst
 
     "_build/book.md" %> \out -> do
@@ -36,13 +41,19 @@ main = shakeArgs shOpts $ do
         getDirectoryFiles "" sources >>= need
         cmd_
             $ "pandoc --filter pandoc-include --from=markdown"
+           <> " --metadata-file=metadata.yaml"
            <> " --to=markdown main.md"
            <> " -o " <> out
 
-    "_build/book.rst" %> \out -> do
-        putInfo "🖋 Building rst."
-        need ["_build/book.md"]
-        cmd_ $ "pandoc _build/book.md -o " <> out
+    "_build/book.pdf" %> \out -> do
+        putInfo "🖋 Building pdf."
+        templatesLst <- getDirectoryFiles "" templatesTypst
+        need $ ["_build/book.md"] <> templatesLst
+        cmd_
+            $ "pandoc _build/book.md"
+           <> " --pdf-engine=typst -o " <> out
+           <> " --metadata-file=metadata.yaml"
+           <> " --template=templates/typst/template1.typ"
 
   where
 

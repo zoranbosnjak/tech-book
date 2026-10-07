@@ -12,6 +12,13 @@ let
 
   ghc = pkgs.haskellPackages.ghcWithPackages haskellDeps;
 
+  fontsConf = pkgs.makeFontsConf {
+    fontDirectories = [
+      pkgs.dejavu_fonts
+      pkgs.lora
+    ];
+  };
+
   deps = with pkgs; [
     pandoc
     pandoc-include
@@ -25,6 +32,9 @@ let
   env = pkgs.mkShell {
     buildInputs = deps ++ [
     ];
+    shellHook = ''
+      export FONTCONFIG_FILE="${fontsConf}"
+    '';
   };
 
   # TODO

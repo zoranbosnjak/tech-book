@@ -1,0 +1,10 @@
+title: "Sample Book"
+
+# typst specific variables
+template: templates/typst/template2.typ
+papersize: a4
+# mainfont: "DejaVu Sans"
+mainfont: "Lora"
+fontsize: 12pt
+# see pandoc manual 'Variables for Typst' for all options
+
