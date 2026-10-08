@@ -1,4 +1,11 @@
 title: "Sample Book"
+description: "A sample book demonstrating markdown to [pdf, html...] generation"
+date: "2026-10-08"
+publisher: "Self Published"
+rights: "© 2025 Whatever"
+
+# cover-image: "assets/cover.jpg"
+bibliography: "assets/bibliography.bib"
 
 # typst specific variables
 papersize: a4
@@ -6,4 +13,8 @@ papersize: a4
 mainfont: "Lora"
 fontsize: 12pt
 # see pandoc manual 'Variables for Typst' for all options
+
+author:
+  - "Author 1 of Sample Book"
+  - "Author 2 of Sample Book"
 

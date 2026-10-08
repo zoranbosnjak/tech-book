@@ -9,6 +9,7 @@ sources =
     , "main.md"
     , "content//"
     , "metadata.yaml"
+    , "bibliography.bib"
     ]
 
 templatesTypst :: [String]
@@ -44,19 +45,23 @@ copyAsset s = ("_build/" <> s <> "//*") %> \out -> do
     let src = s </> dropDirectory1 (dropDirectory1 out)
     copyFileChanged src out
 
+assetDir :: String -> Rules()
+assetDir s = do
+    phonyAsset s
+    copyAsset s
+
 main :: IO ()
 main = shakeArgs shOpts $ do
 
     want $ targets <>
         [ wantAsset "content"
         , wantAsset "templates"
+        , wantAsset "assets"
         ]
 
-    phonyAsset "content"
-    phonyAsset "templates"
-
-    copyAsset "content"
-    copyAsset "templates"
+    assetDir "content"
+    assetDir "templates"
+    assetDir "assets"
 
     phony "clean" $ do
         putInfo "🧹 Cleaning files."
@@ -75,9 +80,9 @@ main = shakeArgs shOpts $ do
         putInfo "🖋 Building markdown output."
         getDirectoryFiles "" sources >>= need
         cmd_
-            $ "pandoc --filter pandoc-include --from=markdown"
-           <> " --metadata-file=metadata.yaml"
-           <> " --to=markdown main.md"
+            $ "pandoc main.md --filter pandoc-include"
+           <> " --from=markdown"
+           <> " --to=markdown"
            <> " -o " <> out
 
     "_build/book.typ" %> \out -> do
@@ -88,6 +93,7 @@ main = shakeArgs shOpts $ do
             $ "pandoc _build/book.md -o " <> out
            <> " --from markdown"
            <> " --to typst"
+           <> " --abbreviations=assets/abbrevs.txt"
            <> " --metadata-file=metadata.yaml"
            <> " --template=templates/typst/template1.typ"
            <> " -V template=templates/typst/template2.typ"
@@ -111,6 +117,7 @@ main = shakeArgs shOpts $ do
             $ "pandoc _build/book.md -o " <> out
            <> " --from markdown"
            <> " --to html5"
+           <> " --abbreviations=assets/abbrevs.txt"
            <> " --template=templates/html/template.html"
            <> " --css templates/html/style.css"
            <> " --include-in-header templates/html/in-header.html"
