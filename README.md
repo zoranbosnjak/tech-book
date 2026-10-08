@@ -16,6 +16,14 @@ shake -h                # show all options
 exit # out of nix-shell
 ```
 
+## devel
+
+```bash
+nix-shell
+ghcid --no-title --lint "--command=ghci -Wall Shakefile"
+exit # out of nix-shell
+```
+
 ## File and chapter hiearchy
 
 Root entry to a document is a single file `main.md`, which can include other

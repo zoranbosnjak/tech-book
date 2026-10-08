@@ -3,21 +3,25 @@ import Development.Shake.Command
 import Development.Shake.FilePath
 import Development.Shake.Util
 
+sources :: [String]
 sources =
     [ "Shakefile.hs"
     , "main.md"
-    , "content//*.md"
+    , "content//"
     , "metadata.yaml"
     ]
 
+templatesTypst :: [String]
 templatesTypst =
     [ "templates/typst//"
     ]
 
+templatesHtml :: [String]
 templatesHtml =
     [ "templates/html//"
     ]
 
+targets :: [String]
 targets =
     [ "_build/book.md"
     , "_build/book.typ"
@@ -25,10 +29,34 @@ targets =
     , "_build/book.html"
     ]
 
+wantAsset :: String -> FilePath
+wantAsset = (<>) "copy-"
+
+phonyAsset :: String -> Rules ()
+phonyAsset s = phony val $ do
+    files <- getDirectoryFiles s ["//*"]
+    need [("_build/" <> s) </> f | f <- files]
+  where
+    val = "copy-" <> s
+
+copyAsset :: String -> Rules ()
+copyAsset s = ("_build/" <> s <> "//*") %> \out -> do
+    let src = s </> dropDirectory1 (dropDirectory1 out)
+    copyFileChanged src out
+
 main :: IO ()
 main = shakeArgs shOpts $ do
 
-    want targets
+    want $ targets <>
+        [ wantAsset "content"
+        , wantAsset "templates"
+        ]
+
+    phonyAsset "content"
+    phonyAsset "templates"
+
+    copyAsset "content"
+    copyAsset "templates"
 
     phony "clean" $ do
         putInfo "🧹 Cleaning files."
@@ -64,10 +92,6 @@ main = shakeArgs shOpts $ do
            <> " --template=templates/typst/template1.typ"
            <> " -V template=templates/typst/template2.typ"
 
-    "_build/templates/typst/template2.typ" %> \out -> do
-        putInfo "🖋 Copy typst template."
-        copyFile' "templates/typst/template2.typ" out
-
     "_build/book.pdf" %> \out -> do
         putInfo "🖋 Building pdf output."
         need
@@ -75,10 +99,6 @@ main = shakeArgs shOpts $ do
             , "_build/templates/typst/template2.typ"
             ]
         cmd_ $ "typst compile _build/book.typ " <> out
-
-    "_build/templates/html/style.css" %> \out -> do
-        putInfo "🖋 Copy html style."
-        copyFile' "templates/html/style.css" out
 
     "_build/book.html" %> \out -> do
         putInfo "🖋 Building html output."

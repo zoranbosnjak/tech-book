@@ -25,7 +25,7 @@ let
     haskellPackages.pandoc-crossref
     typst
     shake
-    ghc
+    ghc ghcid hlint
     entr
   ];
 
