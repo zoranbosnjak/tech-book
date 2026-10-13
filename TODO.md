@@ -24,4 +24,9 @@
 - html output search box
 - style sync between html and pdf outputs, some automation is possible with
   lua filters, see [[https://pandoc.org/typst-property-output.html]]
+- build only selected chapters
+  create filter in the form --only-chapters "regex", where the regex will be
+  matched against each "chaptername-subchaptername-subsubchaptername".
+  Where the match (ignore case, anywhere in the string...) is found, the
+  chapter and all parent chapters will be included in a document.
 
