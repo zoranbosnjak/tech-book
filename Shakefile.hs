@@ -8,6 +8,7 @@ sources =
     [ "Shakefile.hs"
     , "main.md"
     , "content//"
+    , "filters//"
     , "metadata.yaml"
     , "bibliography.bib"
     ]
@@ -25,6 +26,7 @@ templatesHtml =
 targets :: [String]
 targets =
     [ "_build/book.md"
+    , "_build/book.native"
     , "_build/book.typ"
     , "_build/book.pdf"
     , "_build/book.html"
@@ -80,10 +82,20 @@ main = shakeArgs shOpts $ do
         putInfo "🖋 Building markdown output."
         getDirectoryFiles "" sources >>= need
         cmd_
-            $ "pandoc main.md --filter pandoc-include"
+            $ "pandoc main.md"
+           <> " --filter pandoc-include"
+           <> " --lua-filter filters/review.lua"
            <> " --from=markdown"
            <> " --to=markdown"
            <> " -o " <> out
+
+    "_build/book.native" %> \out -> do
+        putInfo "🖋 Building native output."
+        need ["_build/book.md"]
+        cmd_
+            $ "pandoc _build/book.md -o " <> out
+           <> " --from markdown"
+           <> " --to native"
 
     "_build/book.typ" %> \out -> do
         putInfo "🖋 Building typst output."

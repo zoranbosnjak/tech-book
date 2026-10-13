@@ -6,10 +6,18 @@ Basic formatting includes **bold**, *italic*, and ***bold italic*** text. You ca
 
 Unicode check: češnja, žaba, el niño...
 
-## Headings
+## header tagging
+
+Try this...
+
+```markdown
+echo '# chapter {.class1 .class2 tag1="val1" tag2="val2"}' | pandoc -t native
+```
+
+## Headings { review="Mojca Novak" }
 
 ### Level 3 Heading
-#### Level 4 Heading
+#### Level 4 Heading { review="Janez Novak" }
 ##### Level 5 Heading
 ###### Level 6 Heading
 
