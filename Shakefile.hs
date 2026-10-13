@@ -1,7 +1,22 @@
+{-# LANGUAGE LambdaCase #-}
+
+import Control.Monad (when)
+import Data.Maybe (mapMaybe)
+import Data.List (intercalate)
+import System.Console.GetOpt
+
 import Development.Shake
-import Development.Shake.Command
 import Development.Shake.FilePath
-import Development.Shake.Util
+
+newtype Flags
+    = OnlyChapters String
+    deriving (Show, Eq)
+
+flags :: [OptDescr (Either a Flags)]
+flags =
+    [ Option ['c'] ["only-chapters"] (ReqArg (Right . OnlyChapters) "PAT")
+        "Only include chapters matching 'chap-subchap'."
+    ]
 
 sources :: [String]
 sources =
@@ -54,9 +69,11 @@ assetDir s = do
     copyAsset s
 
 main :: IO ()
-main = shakeArgs shOpts $ do
+main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
 
-    want $ targets <>
+    let actualTargets = if null newTargets then targets else newTargets
+
+    want $ actualTargets <>
         [ wantAsset "content"
         , wantAsset "templates"
         , wantAsset "assets"
@@ -91,9 +108,23 @@ main = shakeArgs shOpts $ do
 
     "_build/book.md" %> \out -> do
         putInfo "🖋 Building markdown output."
+        let onlyChaptersList = flip mapMaybe flags' $ \case
+                OnlyChapters ch -> Just ch
+            onlyChaptersString
+                = (\s -> "\"" <> s <> "\"")
+                $ intercalate "|" onlyChaptersList
+            onlyChaptersFilter = case onlyChaptersList of
+                [] -> ""
+                _ ->
+                    " --lua-filter filters/only-chapters.lua"
+                    <> " -M only-chapters=" <> onlyChaptersString
+        when (onlyChaptersList /= []) $ do
+            putWarn $ "⥹ Only include chapters: " <> onlyChaptersString
+
         need ["_build/book.inc"]
-        cmd_
+        cmd_ Shell
             $ "pandoc _build/book.inc"
+           <> onlyChaptersFilter
            <> " --lua-filter filters/review.lua"
            <> " --from=markdown"
            <> " --to=markdown"

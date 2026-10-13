@@ -10,17 +10,8 @@
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
 package.path = filter_dir .. "/?.lua;" .. package.path
 
--- import logging module for debug purposes
 local logging = require 'logging' -- luacheck: ignore
-
--- auxilary function to take some number of elements
-local function take(n, tbl)
-  local result = {}
-  for i = 1, math.min(n, #tbl) do
-    result[i] = tbl[i]
-  end
-  return result
-end
+local common = require 'common' -- luacheck: ignore
 
 -- Remember in which header we currently are.
 local current_header = {}
@@ -40,7 +31,7 @@ local function collect (el)
     local reviewer = el.attributes["review"]
 
     -- trim current header path to the 'level', then append chapter name
-    current_header = take(level-1, current_header)
+    current_header = common.take(level-1, current_header)
     table.insert(current_header, chapter)
 
     -- remember reviewer
