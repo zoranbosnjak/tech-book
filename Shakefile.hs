@@ -1,7 +1,17 @@
+import System.Console.GetOpt
+
 import Development.Shake
-import Development.Shake.Command
 import Development.Shake.FilePath
-import Development.Shake.Util
+
+newtype Flags
+    = OnlyChapters String
+    deriving (Show, Eq)
+
+flags :: [OptDescr (Either a Flags)]
+flags =
+    [ Option ['c'] ["only-chapters"] (ReqArg (Right . OnlyChapters) "REGEX")
+        "Only include chapters matching the provided REGEX pattern."
+    ]
 
 sources :: [String]
 sources =
@@ -53,9 +63,11 @@ assetDir s = do
     copyAsset s
 
 main :: IO ()
-main = shakeArgs shOpts $ do
+main = shakeArgsWith shOpts flags $ \_flags newTargets -> pure $ Just $ do
 
-    want $ targets <>
+    let actualTargets = if null newTargets then targets else newTargets
+
+    want $ actualTargets <>
         [ wantAsset "content"
         , wantAsset "templates"
         , wantAsset "assets"
@@ -80,11 +92,14 @@ main = shakeArgs shOpts $ do
 
     "_build/book.md" %> \out -> do
         putInfo "🖋 Building markdown output."
+        liftIO $ print _flags
         getDirectoryFiles "" sources >>= need
         cmd_
             $ "pandoc main.md"
            <> " --filter pandoc-include"
            <> " --lua-filter filters/review.lua"
+           <> " --lua-filter filters/only-chapters.lua"
+           <> " -M only-chapters=\"asdf|yxcv*_/\""
            <> " --from=markdown"
            <> " --to=markdown"
            <> " -o " <> out
