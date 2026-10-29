@@ -45,6 +45,15 @@
            size: fontsize)
   set heading(numbering: sectionnumbering)
 
+  set table(
+    stroke: 1pt + black,
+    fill: (_, y) => if y == 0 {
+      gray.lighten(30%)
+    } else {
+      gray.lighten(90%)
+    },
+  )
+
   place(top, float: true, scope: "parent", clearance: 4mm)[
   #if title != none {
     align(center)[#block(inset: 2em)[
