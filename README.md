@@ -55,3 +55,17 @@ curl 'https://jaspervdj.be/lorem-markdownum/markdown.txt?no-code=on&num-blocks=5
     && echo "" >> content/random.md
 ```
 
+## Heading identifiers
+
+All headings are auto-identified. There is an algorithm to turn a title to an
+identifier. See [pandoc auto_identifiers extension](https://pandoc.org/MANUAL.html#extension-auto_identifiers).
+
+It is also possible to explicitely put an identifier, like this:
+
+```
+# Introduction {#intro}
+## Getting started {#getting-started}
+
+Some text, see [Introduction chapter](#intro).
+```
+

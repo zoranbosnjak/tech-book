@@ -23,6 +23,7 @@ let
     pandoc
     pandoc-include
     haskellPackages.pandoc-crossref
+    luaPackages.luacheck
     typst
     shake
     ghc ghcid hlint
@@ -44,3 +45,4 @@ let
 in if inShell == false
    then drv
    else if pkgs.lib.inNixShell then env else drv
+

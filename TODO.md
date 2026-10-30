@@ -10,7 +10,6 @@
 - abecedni seznam
 - keywords (ključne besede) segment
 - errata segment (samo za PDF)
-- reviewers <-> chapter tables
 - chapter/subchapter/subsubchapter... symbols
 - notes, warnings admonitions (opozorilo, opomba)
 - login box
