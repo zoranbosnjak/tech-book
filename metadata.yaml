@@ -3,18 +3,14 @@ description: "A sample book demonstrating markdown to [pdf, html...] generation"
 date: "2026-10-08"
 version: "1.2"
 publisher: "Self Published"
-rights: "© 2025 Whatever"
 
 # cover-image: "assets/cover.jpg"
 bibliography: "assets/bibliography.bib"
 
 # typst specific variables
-papersize: a4
-# mainfont: "DejaVu Sans"
-mainfont: "Lora"
-fontsize: 12pt
+mainfont: "DejaVu Sans"
+# mainfont: "Lora"
 section-numbering: "1.1"
-# see pandoc manual 'Variables for Typst' for all options
 
 author:
   - "Author 1 of Sample Book"

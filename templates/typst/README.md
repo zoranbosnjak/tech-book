@@ -1,21 +1,17 @@
 # Typst templates
 
-There are 2 levels of customization, using templates... It might be necessary
-to update templates with new versions of pandoc or typst.
+There are 2 levels of customization:
 
-## Level1 - pandoc template for typst
+- level1: used during conversion from `markdown` to `typst` format
+- level2: used during `typst` to `pdf` processing
 
-`template1.typ` - works on pandoc level to convert markdown files into typst
-format. Use for basic customization, such as margins, fonts,...
+Pandoc provides defaults for both levels, however this document uses
+custom versions of both templates. In addition, some configurable
+settings are defined in a separate style file.
 
-Template starting point was derived from:
-- running `pandoc -D typst > out.typ`
-- or from pandoc sources `pandoc/data/templates/default.typst`
-
-## Level2 - raw typst template
-
-`template2.typ` - works on a typst level and has all typst typesetting power.
-
-Template starting point was derived from:
-- pandoc sources `pandoc/data/templates/template.typst`
+```
+template1-pandoc.typ    <- level1 template
+template2-typst.typ     <- level2 template
+style.typ               <- style file, used by level2 template
+```
 
