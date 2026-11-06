@@ -1,8 +1,10 @@
 # Introduction
 
-This is a *content*.
+This is a test document.
 
 ## Reviewer list
+
+The actual reviewer lists in this chapter are automatically generated.
 
 By chapter...
 

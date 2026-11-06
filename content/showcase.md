@@ -1,16 +1,20 @@
 # Showcase
 
+A demonstration for various concepts of markdown.
+
+## Unicode
+
+Some non-ascii words: češnja, žaba, el niño...
+
 ## Text Formatting
 
 Basic formatting includes **bold**, *italic*, and ***bold italic*** text. You can also use ~~strikethrough~~ and `inline code`.
-
-Unicode check: češnja, žaba, el niño...
 
 ## header tagging
 
 Try this...
 
-```markdown
+```bash
 echo '# chapter {.class1 .class2 tag1="val1" tag2="val2"}' | pandoc -t native
 ```
 
@@ -134,34 +138,25 @@ Another sentence with multiple footnotes.[^a][^b]
 
 ## Custom Divs
 
+::: info
+Just for your information.
+:::
+
 ::: {.warning}
-This is a warning message styled with custom CSS.
+This is a warning message.
 :::
 
-::: {.note}
-This is a note message styled differently.
-:::
-
-::: {.quote author="Jane Doe"}
+::: {author="Jane Doe"}
 The only limit to our realization of tomorrow is our doubts of today.
 :::
 
-## Emphasis and Inline Code
-
-You can have *italic* text, **bold** text, and ***bold-italic*** text all in one paragraph.
-Strikeout is also supported via ~~strikethrough~~.
-
-Inline code: ``printf("Hello, World!\n");`` is rendered as code.
-
-You can use backticks in code spans by wrapping in more backticks, e.g.:
-
-````
-``This is a `code` span``
-`````
-
 ## Blockquotes
 
-Regular text...
+A simple bock
+
+> This is a note...
+
+And nested
 
 > This is a top-level blockquote.
 >
@@ -184,37 +179,6 @@ More regular text...
 * Auto-link: [https://www.example.com](https://www.example.com)
 
 [gh]: https://github.com "GitHub"
-
-## Abbreviations
-
-This document uses abbreviations such as HTML{:.abbr} and PDF{:.abbr}.
-
-> **Note:** To enable abbreviations, compile with `--abbreviations`.
-
-## Definition Lists with Inline Formatting
-
-Pandoc Markdown also supports definition lists with inline code and formatting:
-
-Markdown
-:  A lightweight markup language with plain-text formatting syntax.
-
-Pandoc
-:  A universal document converter.
-
-## Divs and Custom Attributes
-
-You can create custom‐attributed Divs to test Pandoc’s extension:
-
-::: warning
-**Warning:** This is a custom‐styled warning block.
-:::
-
-::: note
-**Note:** This is a custom note block with *italic* and **bold**.
-:::
-
-Pandoc will translate these into `<div class="warning">` or `<div
-class="note">` in HTML.
 
 ## Cross-references
 

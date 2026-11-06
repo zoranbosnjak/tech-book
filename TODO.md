@@ -1,6 +1,5 @@
 # TODO item list
 
-- version and gitrev present in a document
 - list of tables/images (Kazalo slik in kazalo tabel) - Alen
 - abecedni seznam
 - keywords (ključne besede) segment
@@ -12,4 +11,6 @@
 - epub output, check on the phone screen
 - multi page html output
 - html output search box
+- wrapper to keep (something) on the same page
+- explicit newpage
 
