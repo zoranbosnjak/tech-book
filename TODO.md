@@ -9,7 +9,6 @@
 - procedure box
 - wrapper to keep (something) on the same page (prevent pagebreak),
   only relevant for PDF output
-- explicit newpage, for PDF only
 
 Optional items (can be implemented later)
 

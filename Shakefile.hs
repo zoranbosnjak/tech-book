@@ -147,6 +147,7 @@ main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
             $ "pandoc _build/book.md -o " <> out
            <> " --from markdown"
            <> " --to typst"
+           <> " --lua-filter filters/pagebreak.lua"
            <> " --lua-filter filters/typst-boxes.lua"
            <> " --abbreviations=assets/abbrevs.txt"
            <> " --metadata-file=metadata.yaml"

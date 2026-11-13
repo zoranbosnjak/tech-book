@@ -180,3 +180,11 @@ More regular text...
 
 [gh]: https://github.com "GitHub"
 
+## Manual pagebreak
+
+Some content..., inserting manual `\newpage`.
+
+\newpage
+
+This other content will start on the new page (with PDF or similar output).
+
