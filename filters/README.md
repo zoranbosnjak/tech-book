@@ -36,3 +36,23 @@ Another option is to use `print`, like this:
 print("Debug:", pandoc.utils.stringify(args))
 ```
 
+## pagegreak
+
+Use [[https://github.com/pandoc-ext/pagebreak]] to replace `\newpage` in
+markdown to `#pagebreak()` in typst.
+
+```bash
+# run to download the latest version locally
+curl https://raw.githubusercontent.com/pandoc-ext/pagebreak/refs/heads/main/pagebreak.lua > pagebreak.lua
+```
+
+Inside markdown, insert `\newpage`, surrounded by empty lines. Such as:
+
+```markdown
+Some content...
+
+\newpage
+
+This other content will start on the new page.
+```
+
