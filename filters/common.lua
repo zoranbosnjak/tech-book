@@ -1,6 +1,14 @@
 -- Common functions
 
+-- Inform luacheck about some globals, provided by 'pandoc'.
+-- luacheck: globals pandoc
+
 local namespace = {}
+
+-- helper function to detect a placeholder in markdown
+namespace.placeholder = function(cls)
+    return pandoc.Para({pandoc.Span("", {class = cls})})
+end
 
 -- take some number of elements from the list
 namespace.take = function(n, tbl)

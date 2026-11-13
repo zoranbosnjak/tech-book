@@ -19,11 +19,6 @@ local current_header = {}
 -- reviewers 'accumulator'
 local reviewers = {}
 
--- helper function
-local function placeholder (cls)
-    return pandoc.Para({pandoc.Span("", {class = cls})})
-end
-
 -- collect reviewers during the first document pass
 local function collect (el)
     local level = el.level
@@ -108,11 +103,11 @@ end
 
 -- replace the placeholders during the second document pass
 local function replace(el)
-    if el == placeholder("review-by-chapter") then
+    if el == common.placeholder("review-by-chapter") then
         return make_table("Chapter", "Reviewer", by_chapter)
     end
 
-    if el == placeholder("review-by-author") then
+    if el == common.placeholder("review-by-author") then
         return make_table("Chapters", "Reviewer", by_author)
     end
 end

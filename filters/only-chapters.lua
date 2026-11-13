@@ -6,7 +6,7 @@
 -- each chapter with.
 
 -- Inform luacheck about some globals, provided by 'pandoc'.
--- luacheck: globals pandoc PANDOC_SCRIPT_FILE
+-- luacheck: globals pandoc PANDOC_SCRIPT_FILE Pandoc
 
 -- set path for local imports
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
@@ -110,7 +110,7 @@ local function strip(keep, refs, doc)
 end
 
 -- main filter entry point
-function Pandoc(doc) -- luacheck: ignore
+function Pandoc(doc)
     local arg = doc.meta["only-chapters"]
     if not arg then
         return doc
