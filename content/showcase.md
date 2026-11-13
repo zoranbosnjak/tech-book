@@ -180,7 +180,3 @@ More regular text...
 
 [gh]: https://github.com "GitHub"
 
-## Cross-references
-
-TODO...
-
