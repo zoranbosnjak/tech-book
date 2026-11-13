@@ -180,6 +180,22 @@
   pagebreak()
 }
 
+#let errata() = {
+  set heading(outlined: false, numbering: none)
+  [ == Errata
+  Error listing since printout.
+  ]
+  table(
+    columns: (1fr, 3fr, 1fr, 2fr, 2fr),
+    inset: 10pt,
+    table.header(
+      [Page], [Summary], [Fixed in], [Date], [Author],
+    ),
+    ..range(45).map(_ => box(height: 1.5cm)[ ]),
+  )
+  pagebreak()
+}
+
 #let chapter-minitoc(chapter) = {
   if chapter.level == 1 and chapter.outlined { context {
     let following = selector(
@@ -382,6 +398,7 @@
   main-toc()
   figures-toc()
   tables-toc()
+  errata()
   chapters(doc)
 }
 
