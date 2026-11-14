@@ -4,7 +4,6 @@
   with pagenumber on PDF, such as: See {chapter X}, {page Y}.
   Page number is not relevant for html output.
 - abecedni seznam
-- keywords (ključne besede) segment
 - login box
 - procedure box
 - wrapper to keep (something) on the same page (prevent pagebreak),
