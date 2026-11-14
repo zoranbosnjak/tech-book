@@ -11,7 +11,7 @@
 #show: doc => conf(
   doc,
   [$title$],
-  (),
+  ($for(keywords)$"$keywords/nowrap$"$sep$,$endfor$),
   [$date$],
   [$version$],
   [$gitrev$],

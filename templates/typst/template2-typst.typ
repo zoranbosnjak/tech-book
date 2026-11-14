@@ -16,7 +16,6 @@
 }
 
 #let cover-page(title, date, version, gitrev, publisher) = {
-  let hline = line(length: 100%, stroke: 2pt)
   page(numbering: none, header: none, footer: none)[
     #line(length: 100%, stroke: 2pt)
     #v(12pt)
@@ -60,6 +59,18 @@
     chapters.last().body
   } else {
     []
+  }
+}
+
+#let page-footer-simple() = context {
+  thin-line()
+  set text(size: 10pt, fill: rgb("#070707"))
+  let pn = counter(page).display("1/1", both: true)
+  if calc.odd(here().page()) {
+    [ #pn #h(1fr) ]
+  }
+  else {
+    [ #h(1fr) #pn ]
   }
 }
 
@@ -180,7 +191,14 @@
   pagebreak()
 }
 
-#let errata() = {
+#let keywords-page(keywords) = {
+  page(numbering: none, footer: page-footer-simple())[
+    *Keywords*:
+    #keywords.join(", ")
+  ]
+}
+
+#let errata-page() = {
   set heading(outlined: false, numbering: none)
   [ == Errata
   Error listing since printout.
@@ -398,7 +416,8 @@
   main-toc()
   figures-toc()
   tables-toc()
-  errata()
+  keywords-page(keywords)
+  errata-page()
   chapters(doc)
 }
 

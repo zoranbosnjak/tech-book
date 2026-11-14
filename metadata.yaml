@@ -16,3 +16,8 @@ author:
   - "Author 1 of Sample Book"
   - "Author 2 of Sample Book"
 
+keywords:
+  - "sample book"
+  - "pandoc"
+  - "markdown"
+
