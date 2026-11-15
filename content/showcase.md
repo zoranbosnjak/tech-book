@@ -112,7 +112,29 @@ Here's an example image:
 
 ## Cross-references
 
+### With links
+
+```markdown
 See [Tables](#tables) for more information.
+```
+
+This creates a 'link' that works for both `html` and `typst/pdf`. The problem is
+that this can not produce "... on page XY" output.
+
+See [Tables](#tables) for more information.
+
+### With refs
+
+In raw typst, the `#ref(<tables>, form: "page")` does the trick. But there is
+not standard markdown notation to create `ref`. As a workaround, a special
+notation is required, for example with `xref` class. The filter then converts
+it to `ref` if typst is the output. So use this:
+
+```markdown
+See [Tables](#tables){.xref} for more information.
+```
+
+See [Tables](#tables){.xref} for more information.
 
 ## Footnotes
 

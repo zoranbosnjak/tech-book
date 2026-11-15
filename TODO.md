@@ -1,8 +1,5 @@
 # TODO item list
 
-- clickable cross references to chapters or custom locations,
-  with pagenumber on PDF, such as: See {chapter X}, {page Y}.
-  Page number is not relevant for html output.
 - abecedni seznam
 - login box
 - procedure box

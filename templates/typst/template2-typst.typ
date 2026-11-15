@@ -378,6 +378,8 @@
     footer: page-footer(),
     footer-descent: 0.75cm,
     columns: 1,
+    numbering: "1",       // select numbering system for ("see X on page Y)
+    supplement: "página", // customize, instead of 'page'
   )
   set par(justify: true)
   set text(
@@ -409,7 +411,11 @@
   )
 
   show link: set text(
-    fill: rgb("#0513da"),
+    fill: style.link,
+  )
+
+  show ref: set text(
+    fill: style.link,
   )
 
   cover-page(title, date, version, gitrev, publisher)

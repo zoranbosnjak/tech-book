@@ -149,6 +149,7 @@ main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
            <> " --to typst"
            <> " --lua-filter filters/pagebreak.lua"
            <> " --lua-filter filters/typst-boxes.lua"
+           <> " --lua-filter filters/xref.lua"
            <> " --abbreviations=assets/abbrevs.txt"
            <> " --metadata-file=metadata.yaml"
            <> " --template=templates/typst/template1-pandoc.typ"

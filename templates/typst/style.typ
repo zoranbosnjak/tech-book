@@ -2,6 +2,8 @@
 
 #let style = (
 
+  link: rgb("#0513da"),
+
   toc: (
     heading-space: 1cm,
     heading-size: 18pt,
