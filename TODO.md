@@ -1,10 +1,12 @@
 # TODO item list
 
-- abecedni seznam
 - login box
-- procedure box
+- procedure box, steps symbol examples:
+    - 👉 (U+1F449)
+    - → (U+2192)
 - wrapper to keep (something) on the same page (prevent pagebreak),
   only relevant for PDF output
+- inline icons
 
 Optional items:
 

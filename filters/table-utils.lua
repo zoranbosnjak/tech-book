@@ -1,4 +1,4 @@
--- Table related helper functions
+-- Table related helper functions (list, set, dict,...)
 
 local namespace = {}
 
@@ -19,6 +19,32 @@ namespace.is_elem = function(el, lst)
         end
     end
     return false
+end
+
+namespace.set2list = function(set)
+    local result = {}
+    for value in pairs(set) do
+        result[#result + 1] = value
+    end
+    return result
+end
+
+namespace.map_keys = function(arg)
+    local result = {}
+    for key, _ in pairs(arg) do
+        table.insert(result, key)
+    end
+    return result
+end
+
+namespace.map_filter = function(check, arg)
+    local result = {}
+    for key, val in pairs(arg) do
+        if check(key, val) then
+            result[key] = val
+        end
+    end
+    return result
 end
 
 return namespace
