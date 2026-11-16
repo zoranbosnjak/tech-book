@@ -1,6 +1,5 @@
 # TODO item list
 
-- abecedni seznam
 - login box
 - procedure box
 - wrapper to keep (something) on the same page (prevent pagebreak),

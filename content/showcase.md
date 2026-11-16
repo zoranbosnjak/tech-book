@@ -136,6 +136,34 @@ See [Tables](#tables){.xref} for more information.
 
 See [Tables](#tables){.xref} for more information.
 
+## Indices { index="index" }
+
+Put index label anywhere in a document (even in a header):
+
+```markdown
+[]{index="my label"}
+```
+
+[]{index="index1"}
+
+Some more indices []{index="češnja in višnja"}.
+
+Some text...
+
+\newpage
+
+Yet more indices []{index="žaba"}.
+
+[Another index1]{index="index1"}, but on a different page.
+[]{index="index2"}
+
+A filter will capture all of them and create an index table where requested.
+See [Index chapter](#index){.xref}.
+
+###  Index
+
+[]{.index-table}
+
 ## Footnotes
 
 Here's a sentence with a footnote[^1].
