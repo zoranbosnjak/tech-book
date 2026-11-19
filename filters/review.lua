@@ -4,14 +4,13 @@
 --    '[]{.review-by-author}'
 
 -- Inform luacheck about some globals, provided by 'pandoc'.
--- luacheck: globals pandoc PANDOC_SCRIPT_FILE
+-- luacheck: globals pandoc PANDOC_SCRIPT_FILE Pandoc
 
 -- set path for local imports
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
 package.path = filter_dir .. "/?.lua;" .. package.path
 
-local logging = require 'logging' -- luacheck: ignore
-local common = require 'common' -- luacheck: ignore
+local common = require 'common'
 
 -- Remember in which header we currently are.
 local current_header = {}
@@ -113,7 +112,7 @@ local function replace(el)
 end
 
 -- main filter entry point
-function Pandoc(doc) -- luacheck: ignore
+function Pandoc(doc)
     -- walk document twice, with 'collect' and 'replace' stages
     return doc:walk { Header = collect }:walk { Para = replace }
 end
