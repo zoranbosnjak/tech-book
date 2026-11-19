@@ -23,10 +23,10 @@ Use it like this:
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
 package.path = filter_dir .. "/?.lua;" .. package.path
 
-local logging = require 'logging'
+local debug = require("logging").temp
 
 function Para(para)
-    logging.temp('para', para)
+    debug('para', para)
 end
 ```
 

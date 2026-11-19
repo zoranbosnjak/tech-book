@@ -4,14 +4,14 @@
 --    '[]{.review-by-author}'
 
 -- Inform luacheck about some globals, provided by 'pandoc'.
--- luacheck: globals pandoc PANDOC_SCRIPT_FILE
+-- luacheck: globals pandoc PANDOC_SCRIPT_FILE Pandoc
 
 -- set path for local imports
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
 package.path = filter_dir .. "/?.lua;" .. package.path
 
-local logging = require 'logging' -- luacheck: ignore
-local common = require 'common' -- luacheck: ignore
+local tbl = require("table-utils")
+local pandoc_utils = require("pandoc-utils")
 
 -- Remember in which header we currently are.
 local current_header = {}
@@ -26,7 +26,7 @@ local function collect (el)
     local reviewer = el.attributes["review"]
 
     -- trim current header path to the 'level', then append chapter name
-    current_header = common.take(level-1, current_header)
+    current_header = tbl.take(level-1, current_header)
     table.insert(current_header, chapter)
 
     -- remember reviewer
@@ -103,17 +103,17 @@ end
 
 -- replace the placeholders during the second document pass
 local function replace(el)
-    if el == common.placeholder("review-by-chapter") then
+    if el == pandoc_utils.placeholder("review-by-chapter") then
         return make_table("Chapter", "Reviewer", by_chapter)
     end
 
-    if el == common.placeholder("review-by-author") then
+    if el == pandoc_utils.placeholder("review-by-author") then
         return make_table("Chapters", "Reviewer", by_author)
     end
 end
 
 -- main filter entry point
-function Pandoc(doc) -- luacheck: ignore
+function Pandoc(doc)
     -- walk document twice, with 'collect' and 'replace' stages
     return doc:walk { Header = collect }:walk { Para = replace }
 end

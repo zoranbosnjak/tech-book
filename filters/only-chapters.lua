@@ -12,8 +12,7 @@
 local filter_dir = pandoc.path.directory(PANDOC_SCRIPT_FILE)
 package.path = filter_dir .. "/?.lua;" .. package.path
 
-local logging = require 'logging' -- luacheck: ignore
-local common = require 'common' -- luacheck: ignore
+local common = require 'common'
 
 -- split string on '|'
 local function split_arg(arg)
