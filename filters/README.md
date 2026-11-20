@@ -36,6 +36,8 @@ Another option is to use `print`, like this:
 print("Debug:", pandoc.utils.stringify(args))
 ```
 
+Logging is also re-exported from common.
+
 ## pagegreak
 
 Use [[https://github.com/pandoc-ext/pagebreak]] to replace `\newpage` in
