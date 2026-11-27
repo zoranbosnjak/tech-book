@@ -335,28 +335,6 @@
   doc
 }
 
-// style 'Div' according to given class
-#let div(body, cls: none) = {
-  let ref = if cls == "info" { style.divs.info }
-            else if cls == "warning" { style.divs.warning }
-            else { style.divs.default }
-
-  block(
-    width: 100%,
-    above: 1em,
-    below: 1em,
-    inset: 2em,
-    radius: 4pt,
-    fill: ref.fill,
-    stroke: (
-      left: 5pt + ref.border,
-      top: 1pt + style.divs.default.border,
-      right: 1pt + style.divs.default.border,
-      bottom: 1pt + style.divs.default.border,
-    ),
-  )[ #body ]
-}
-
 // Document template entry point
 #let conf(doc, title, keywords, date, version, gitrev, publisher,
     font, sectionnumbering) = {

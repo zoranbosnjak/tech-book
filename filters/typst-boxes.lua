@@ -1,21 +1,31 @@
--- typst output needs filters for custom divs
---
--- Wrap each 'Div' in a typst function call.
--- This function will do the div styling.
+-- Typst output needs filters to style 'Divs'
 
 -- Inform luacheck about some globals, provided by 'pandoc'.
--- luacheck: globals pandoc PANDOC_SCRIPT_FILE Div
+-- luacheck: globals Div
 
-function Div(el)
-    local cls
-    if el.classes:includes('info') then
-        cls = 'cls: "info"'
-    elseif el.classes:includes('warning') then
-        cls = 'cls: "warning"'
-    else
-        cls = 'cls: none'
+function Div(div)
+    local ref = "style.divs.default"
+    if div.classes:includes('info') then
+        ref = "style.divs.info"
+    elseif div.classes:includes('warning') then
+        ref = "style.divs.warning"
+    elseif div.classes:includes('login') then
+        ref = "style.divs.login"
     end
-    return pandoc.RawBlock('typst',
-        '#div(' .. cls .. ')[' .. pandoc.utils.stringify(el.content) .. ']')
+
+    div.attributes["typst:width"] = "100%"
+    div.attributes["typst:above"] = "1em"
+    div.attributes["typst:below"] = "1em"
+    div.attributes["typst:inset"] = "2em"
+    div.attributes["typst:radius"] = "4pt"
+    div.attributes["typst:fill"] = ref .. ".fill"
+    div.attributes["typst:stroke"] = "("
+        .. "left: 5pt + " .. ref .. ".border"
+        .. ", top: 1pt + style.divs.default.border"
+        .. ", right: 1pt + style.divs.default.border"
+        .. ", bottom: 1pt + style.divs.default.border"
+        .. ")"
+    return div
+
 end
 

@@ -4,7 +4,7 @@
 #let horizontalrule = line(start: (25%,0%), end: (75%,0%))
 
 // some functions are needed for the filters
-#import "templates/typst/template2-typst.typ": div
+#import "templates/typst/template2-typst.typ": style
 
 // Import and use level2 typst template.
 #import "templates/typst/template2-typst.typ": conf
