@@ -6,7 +6,6 @@
     - → (U+2192)
 - wrapper to keep (something) on the same page (prevent pagebreak),
   only relevant for PDF output
-- inline icons
 
 Optional items:
 

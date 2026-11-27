@@ -110,6 +110,8 @@ Here's an example image:
 
 ![Example SVG image](img2.svg){ width=5.5cm height=auto }
 
+An image (![star](star.png){width=1.2em}) can also be placed inline.
+
 ## Cross-references
 
 ### With links
