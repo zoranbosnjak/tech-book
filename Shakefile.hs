@@ -126,6 +126,7 @@ main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
             $ "pandoc _build/book.inc"
            <> onlyChaptersFilter
            <> " --lua-filter filters/review.lua"
+           <> " --lua-filter filters/login.lua"
            <> " --from=markdown"
            <> " --to=markdown"
            <> " -o " <> out

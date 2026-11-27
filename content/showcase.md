@@ -203,6 +203,20 @@ This is a warning message.
 The only limit to our realization of tomorrow is our doubts of today.
 :::
 
+## Other custom forms
+
+For example the `!login` directive like this
+
+```
+!login user1 passwd1234
+```
+
+..., can be processd in lua filter, to get this result:
+
+!login user1 passwd1234
+
+Some more text can follow.
+
 ## Blockquotes
 
 A simple bock

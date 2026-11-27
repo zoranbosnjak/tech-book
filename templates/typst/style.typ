@@ -56,6 +56,10 @@
       fill: rgb("#ffffcc"),
       border: rgb("#f54927"),
     ),
+    login: (
+      fill: rgb("#d3d3d3"),
+      border: rgb("#0000ff"),
+    ),
   ),
 
   quote: (

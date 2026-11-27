@@ -1,6 +1,5 @@
 # TODO item list
 
-- login box
 - procedure box, steps symbol examples:
     - 👉 (U+1F449)
     - → (U+2192)
