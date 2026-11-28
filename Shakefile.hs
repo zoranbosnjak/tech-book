@@ -149,6 +149,7 @@ main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
            <> " --from markdown"
            <> " --to typst"
            <> " --lua-filter filters/pagebreak.lua"
+           <> " --lua-filter filters/same-page.lua"
            <> " --lua-filter filters/procedure.lua"
            <> " --lua-filter filters/typst-boxes.lua"
            <> " --lua-filter filters/alphabetical-index.lua"
@@ -187,6 +188,7 @@ main = shakeArgsWith shOpts flags $ \flags' newTargets -> pure $ Just $ do
            <> " --include-in-header templates/html/in-header.html"
            <> " --include-before-body templates/html/before-body.html"
            <> " --include-after-body templates/html/after-body.html"
+           <> " --lua-filter filters/same-page.lua"
            <> " --lua-filter filters/procedure.lua"
            <> " --lua-filter filters/alphabetical-index.lua"
            <> " --metadata gitrev=" <> gitrev

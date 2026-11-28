@@ -112,6 +112,25 @@ Here's an example image:
 
 An image (![star](star.png){width=1.2em}) can also be placed inline.
 
+### Same page test
+
+Test...
+
+::: same-page
+We want to keep this on the same page (only relevant on some output
+types, like PDF).
+
+- test
+- test
+- test
+- test
+- test
+- test
+- test
+- test
+- test
+:::
+
 ## Cross-references
 
 ### With links
