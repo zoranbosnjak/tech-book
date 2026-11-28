@@ -1,8 +1,5 @@
 # TODO item list
 
-- procedure box, steps symbol examples:
-    - 👉 (U+1F449)
-    - → (U+2192)
 - wrapper to keep (something) on the same page (prevent pagebreak),
   only relevant for PDF output
 

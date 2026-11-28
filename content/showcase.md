@@ -192,7 +192,10 @@ Another sentence with multiple footnotes.[^a][^b]
 ## Custom Divs
 
 ::: info
-Just for your information.
+Just for your information...
+
+- item1
+- item2
 :::
 
 ::: {.warning}
@@ -201,6 +204,19 @@ This is a warning message.
 
 ::: {author="Jane Doe"}
 The only limit to our realization of tomorrow is our doubts of today.
+:::
+
+### Procedures
+
+Follow this procedure:
+
+::: procedure
+- say hello
+```bash
+echo "hello"
+```
+- relax
+- this is it
 :::
 
 ## Other custom forms
